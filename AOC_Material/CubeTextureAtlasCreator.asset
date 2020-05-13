@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63a9f8515bf2f404a951ca729dc58f88, type: 3}
+  m_Name: CubeTextureAtlasCreator
+  m_EditorClassIdentifier: 
+  m_Texture2Ds:
+  - {fileID: 2800000, guid: 4a51f6be193f9f34b9b2be2f9ac6d6cd, type: 3}
+  - {fileID: 2800000, guid: 6dbdd474e79f2a54ab4c69bdfa32a4bd, type: 3}
+  m_Size: 64
+  m_TextureFormat: 5
+  m_OutputFolder: Assets/DemoGames/AgeOfCube/AOC_Material
+  m_SaveName: CubeTextureAtlas
+  m_Texture: {fileID: 2800000, guid: 987b16ee7434019408409a5e74671792, type: 3}
+  m_AtlasSize: 128
+  m_Seg: 2
