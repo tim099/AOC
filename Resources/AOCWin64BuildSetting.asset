@@ -25,7 +25,7 @@ MonoBehaviour:
   m_Icons: []
   m_DefaultIcon: {fileID: 0}
   m_BuildAppBundle: 0
-  m_OutputPath: Build/PC/
+  m_OutputPath: Build/AOC_PC/
   m_OutputName: AOCWin64.exe
   m_ScenesInBuild: []
   m_KeystoreName: 
