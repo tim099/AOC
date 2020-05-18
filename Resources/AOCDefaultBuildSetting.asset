@@ -15,14 +15,16 @@ MonoBehaviour:
   m_ApplySetting: 0
   m_LoadCurrentSetting: 0
   m_Build: 0
+  m_OpenOutputFolder: 0
   m_DefaultSetting: {fileID: 0}
-  m_ProductName: UCLibWin64
+  m_ProductName: AOC
   m_ApplicationIdentifier: 
   m_BuildTargetGroup: 1
   m_BuildTarget: 19
   m_BuildOption: 0
   m_Icons:
   - {fileID: 2800000, guid: 2c6536772776dd84f872779990273bfc, type: 3}
+  m_DefaultIcon: {fileID: 0}
   m_BuildAppBundle: 0
   m_OutputPath: Build/PC/
   m_OutputName: AOC.exe

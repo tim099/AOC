@@ -15,13 +15,15 @@ MonoBehaviour:
   m_ApplySetting: 0
   m_LoadCurrentSetting: 0
   m_Build: 0
+  m_OpenOutputFolder: 0
   m_DefaultSetting: {fileID: 11400000, guid: 70c9a9b7bcb1ec3428363af8841432d2, type: 2}
-  m_ProductName: UCLibWin64
+  m_ProductName: AOC
   m_ApplicationIdentifier: 
   m_BuildTargetGroup: 1
   m_BuildTarget: 19
   m_BuildOption: 0
   m_Icons: []
+  m_DefaultIcon: {fileID: 0}
   m_BuildAppBundle: 0
   m_OutputPath: Build/PC/
   m_OutputName: AOCWin64.exe
