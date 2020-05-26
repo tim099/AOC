@@ -332,7 +332,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &277451505
+--- !u!1 &295974872
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -340,69 +340,72 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 277451508}
-  - component: {fileID: 277451507}
-  - component: {fileID: 277451506}
+  - component: {fileID: 295974875}
+  - component: {fileID: 295974874}
+  - component: {fileID: 295974873}
   m_Layer: 0
-  m_Name: Terrain_(-1021.0, -29.0, -230.0)
+  m_Name: MicTest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 4294967295
+  m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!154 &277451506
-TerrainCollider:
+--- !u!114 &295974873
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 277451505}
-  m_Material: {fileID: 0}
+  m_GameObject: {fileID: 295974872}
   m_Enabled: 1
-  m_TerrainData: {fileID: 15600000, guid: 9b3ccc05fbafc114cb2720ef0eda238a, type: 2}
-  m_EnableTreeColliders: 1
---- !u!218 &277451507
-Terrain:
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 08b450de325eb7843ab3db29e83649be, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Frequency: 16000
+  m_Channels: 1
+  m_DeviceName: "\u9EA5\u514B\u98A8 (Realtek High Definition Audio)"
+  m_DeviceID: 0
+  m_Loop: 1
+  m_Recording: 1
+  m_RecordAudioListenerData: 0
+  m_LengthSec: 4
+  m_EchoCancellationOffSet: 0
+  m_MaxRecordTime: 128
+  m_ClippingThreshold: 0
+  m_ClippingValidPercent: 0.05
+  m_ClippingMinValidTime: 512
+  m_ReadPosition: 0
+  m_FrameTime: 64
+  m_MaxBufferCount: 2
+  m_ClippingTimer: 0
+--- !u!114 &295974874
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 277451505}
+  m_GameObject: {fileID: 295974872}
   m_Enabled: 1
-  serializedVersion: 6
-  m_TerrainData: {fileID: 15600000, guid: 9b3ccc05fbafc114cb2720ef0eda238a, type: 2}
-  m_TreeDistance: 5000
-  m_TreeBillboardDistance: 50
-  m_TreeCrossFadeLength: 5
-  m_TreeMaximumFullLODCount: 50
-  m_DetailObjectDistance: 80
-  m_DetailObjectDensity: 1
-  m_HeightmapPixelError: 5
-  m_SplatMapDistance: 1000
-  m_HeightmapMaximumLOD: 0
-  m_ShadowCastingMode: 2
-  m_DrawHeightmap: 1
-  m_DrawInstanced: 0
-  m_DrawTreesAndFoliage: 1
-  m_ReflectionProbeUsage: 1
-  m_MaterialTemplate: {fileID: 10652, guid: 0000000000000000f000000000000000, type: 0}
-  m_BakeLightProbesForTrees: 1
-  m_PreserveTreePrototypeLayers: 0
-  m_DeringLightProbesForTrees: 1
-  m_ScaleInLightmap: 0.0256
-  m_LightmapParameters: {fileID: 15203, guid: 0000000000000000f000000000000000, type: 0}
-  m_GroupingID: 0
-  m_RenderingLayerMask: 1
-  m_AllowAutoConnect: 1
---- !u!4 &277451508
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 841de0e1839433e4e93a0d96fb3c0854, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_BufferLen: 2048
+  m_UCL_AudioStream: {fileID: 295974873}
+  m_MaxDataCount: 4
+  m_InitOnStart: 1
+  m_Pause: 0
+  m_UCL_StreamingAudioSource: {fileID: 0}
+--- !u!4 &295974875
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 277451505}
+  m_GameObject: {fileID: 295974872}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1021, y: -29, z: -230}
+  m_LocalPosition: {x: -383.70013, y: -272.5902, z: 469.6268}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -498,8 +501,8 @@ Terrain:
   m_TreeBillboardDistance: 50
   m_TreeCrossFadeLength: 5
   m_TreeMaximumFullLODCount: 50
-  m_DetailObjectDistance: 80
-  m_DetailObjectDensity: 1
+  m_DetailObjectDistance: 173
+  m_DetailObjectDensity: 0.259
   m_HeightmapPixelError: 5
   m_SplatMapDistance: 1000
   m_HeightmapMaximumLOD: 0
@@ -508,7 +511,7 @@ Terrain:
   m_DrawInstanced: 0
   m_DrawTreesAndFoliage: 1
   m_ReflectionProbeUsage: 1
-  m_MaterialTemplate: {fileID: 10652, guid: 0000000000000000f000000000000000, type: 0}
+  m_MaterialTemplate: {fileID: 2100000, guid: 8024b019c36683b4a93a86a5eeb54011, type: 2}
   m_BakeLightProbesForTrees: 1
   m_PreserveTreePrototypeLayers: 0
   m_DeringLightProbesForTrees: 1
@@ -525,7 +528,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 495835870}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -21, y: -29, z: -230}
+  m_LocalPosition: {x: -530, y: -19, z: -482}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -560,7 +563,7 @@ Light:
   m_Type: 1
   m_Shape: 0
   m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
-  m_Intensity: 1.5
+  m_Intensity: 2
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
