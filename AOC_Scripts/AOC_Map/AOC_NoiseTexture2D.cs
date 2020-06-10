@@ -13,7 +13,7 @@ namespace AOC.MapLib {
         [Range(0.0f,10.0f)] public float time_offset = 1.0f;
         [Range(0.0f, 0.2f)] public float scale = 0.1f;
 
-        RangeChecker<float> check = new RangeChecker<float>();
+        //RangeChecker<float> check = new RangeChecker<float>();
         private void Start() {
             m_Texture = new UCL_Texture2D(m_Size);
         }
@@ -28,7 +28,7 @@ namespace AOC.MapLib {
                     float z = time_offset * time;
                     switch(m_Type) {
                         case 0: {
-                                c = UCL.Core.MathLib.Noise.PerlinNoiseUnsigned(x, y, z);
+                                c = UCL.Core.MathLib.Noise.PerlinNoiseUnsigned(scale * j, scale * i, z);
                                 //Mathf.PerlinNoise(time_offset * time + scale * j, time_offset * time + scale *i);
 
                                 break;
@@ -47,11 +47,11 @@ namespace AOC.MapLib {
                                 break;
                             }
                     }
-                    check.AddValue(c);
+                    //check.AddValue(c);
                     m_Texture.SetPixel(new Vector2Int(j, i), new Color(c, c, c, 1));
                 }
             }
-            Debug.LogWarning("check max" + check.Max + ",check min:" + check.Min);
+            //Debug.LogWarning("check max" + check.Max + ",check min:" + check.Min);
             UCL.Core.DebugLib.UCL_DebugOnGUI.Instance.CreateData().SetOnGUIAct(() => {
                 GUILayout.BeginVertical();
                 GUILayout.Box(m_Texture.texture);

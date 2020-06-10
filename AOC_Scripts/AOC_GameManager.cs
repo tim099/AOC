@@ -15,7 +15,7 @@ namespace AOC {
             }
             Debug.LogWarning("AOC_GameManager Init!!");
             Debug.LogWarning("Test4:" + m_GameConfig.GetString("Test4"));
-            m_GameConfig.SetValue("Test4",System.DateTime.Now.ToString("HHmmss"));
+            m_GameConfig.SetValue("Test4",System.DateTime.Now.ToString("HH:mm:ss"));
         }
     }
 }

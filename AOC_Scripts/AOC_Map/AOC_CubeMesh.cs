@@ -52,14 +52,21 @@ namespace AOC.MapLib {
             var terrain = new int[m_GenSize.x, m_GenSize.y, m_GenSize.z];
             for(int i = 0; i < m_GenSize.x; i++) {
                 for(int j = 0; j < m_GenSize.z; j++) {
-                    terrain[i, 0, j] = Random.Range(0,4)+1;
+                    float height = 0.5f*m_GenSize.y * UCL.Core.MathLib.Noise.PerlinNoiseUnsigned(0.03f*j, 0.03f * i, 0);
+                    if(height > m_GenSize.y) height = m_GenSize.y;
+                    for(int k = 0; k < height; k++) {
+                        terrain[i, k, j] = Random.Range(0, 4) + 1;
+                    }
+                    //terrain[i, 0, j] = Random.Range(0,4)+1;
                 }
             }
+            /*
             for(int i = 0; i < m_GenSize.x/2; i++) {
                 for(int j = 0; j < m_GenSize.z/2; j++) {
                     terrain[i, 1, j] = 2;
                 }
             }
+            */
             GenTerrain(terrain, Vector3Int.zero);
         }
 
