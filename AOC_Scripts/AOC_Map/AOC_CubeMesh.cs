@@ -23,7 +23,7 @@ namespace AOC.MapLib {
             public float[] m_Atlas;
         }
         //static public Game.ComponentPool<BoxCollider> m_ColliderPool = new Game.ComponentPool<BoxCollider>();
-        static UCL_Vector<int> m_Tri = new UCL_Vector<int>();
+        
         static UCL_Vector<AtlasData> m_AtlasVec = new UCL_Vector<AtlasData>(256);
         //static Dictionary<CubeSide, Vector3[]> VerticesDic = new Dictionary<CubeSide, Vector3[]>();
         public float m_CubeSize = 1.0f;
@@ -47,6 +47,7 @@ namespace AOC.MapLib {
         public bool f_MeshCollideOn = false;
         public bool f_Updating = false;
 
+        [UCL.Core.ATTR.UCL_FunctionButton]
         public override void Init() {
             base.Init();
             var terrain = new int[m_GenSize.x, m_GenSize.y, m_GenSize.z];
@@ -60,13 +61,6 @@ namespace AOC.MapLib {
                     //terrain[i, 0, j] = Random.Range(0,4)+1;
                 }
             }
-            /*
-            for(int i = 0; i < m_GenSize.x/2; i++) {
-                for(int j = 0; j < m_GenSize.z/2; j++) {
-                    terrain[i, 1, j] = 2;
-                }
-            }
-            */
             GenTerrain(terrain, Vector3Int.zero);
         }
 
@@ -268,7 +262,7 @@ namespace AOC.MapLib {
                 }
             }
             #endregion
-            GenTriangles();
+            GenTriangles(m_FaceCount);
         }
         virtual public void GenTerrainAsyc(int[,,] Terrain, Vector3Int StartPos, System.Action end_act = null) {
             if(m_TextureAtlasRuntime) {
@@ -294,27 +288,6 @@ namespace AOC.MapLib {
             GenMesh(Terrain, StartPos);
 
             GenerateMesh();
-        }
-        protected int[] GenTriangles() {
-            lock(m_Tri) {
-                int len = 6 * m_FaceCount;
-                if(m_Tri.Count < len) {
-                    int i = m_Tri.Count/6;
-
-                    m_Tri.Resize(len);
-                    for(; i < m_FaceCount; i++) {
-                        int p = 6 * i, q = 4 * i;
-                        m_Tri[p] = q;
-                        m_Tri[p + 1] = q + 3;
-                        m_Tri[p + 2] = q + 1;
-
-                        m_Tri[p + 3] = q + 3;
-                        m_Tri[p + 4] = q + 2;
-                        m_Tri[p + 5] = q + 1;
-                    }
-                }
-            }
-            return m_Tri.m_Arr;
         }
         UCL_Vector<BoxCollider> m_BoxColliders = new UCL_Vector<BoxCollider>();
         virtual public void SetColliderActive(bool flag) {
@@ -346,13 +319,13 @@ namespace AOC.MapLib {
 
             var fil = GetComponent<MeshFilter>();
             if(fil == null) return;
-            Mesh mesh = fil.mesh;
+            Mesh mesh = fil.sharedMesh;
             mesh.indexFormat = m_IndexFormat;
 
             mesh.Clear();
             mesh.SetVertices(m_VerticeVec.m_Arr);//new ArraySegment<Vector3>(m_VerticeVec.m_Arr,0, m_VerticeVec.Count).Array;
             mesh.SetNormals(m_NormalVec.m_Arr);
-            mesh.SetTriangles(GenTriangles(), 0, 6 * m_FaceCount, 0);// m_TrianglesVec.ResizeToCount();
+            mesh.SetTriangles(GenTriangles(m_FaceCount), 0, 6 * m_FaceCount, 0);// m_TrianglesVec.ResizeToCount();
             mesh.uv = m_UVsVec.m_Arr;//m_UV.ToArray(); // add this line to the code here
 
             if(f_MeshCollideOn) {
