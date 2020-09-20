@@ -5,12 +5,12 @@ using UCL;
 namespace AOC {
     public class AOC_GameManager : UCL.Core.Game.UCL_GameManager {
         protected override void Init() {
-            if(f_Inited) return;
+            if(m_Inited) return;
 
 
 
             base.Init();
-            if(!f_Inited) {//base.Init() fail!!
+            if(!m_Inited) {//base.Init() fail!!
                 return;
             }
             Debug.LogWarning("AOC_GameManager Init!!");
