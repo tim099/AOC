@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UCL.Core.Container;
+using System.Net.Sockets;
+
 namespace AOC.MapLib {
     public enum CubeSide {
         Null = 0,
@@ -15,14 +17,12 @@ namespace AOC.MapLib {
     [UCL.Core.ATTR.EnableUCLEditor]
     public class AOC_CubeMesh : UCL.MeshLib.UCL_MeshCreator {
         class AtlasData {
-            public AtlasData() {
-                //m_Atlas = new float[n];
-                //m_Inited = false;
+            public AtlasData(float[] _Atlas) {
+                m_Atlas = _Atlas;
             }
-            //public bool m_Inited;
             public float[] m_Atlas;
         }
-        //static public Game.ComponentPool<BoxCollider> m_ColliderPool = new Game.ComponentPool<BoxCollider>();
+        static public ComponentPool<BoxCollider> m_ColliderPool = new ComponentPool<BoxCollider>();
         
         static UCL_Vector<AtlasData> m_AtlasVec = new UCL_Vector<AtlasData>(256);
         //static Dictionary<CubeSide, Vector3[]> VerticesDic = new Dictionary<CubeSide, Vector3[]>();
@@ -46,17 +46,24 @@ namespace AOC.MapLib {
         public bool f_UpdateCollider = true;
         public bool f_MeshCollideOn = false;
         public bool f_Updating = false;
-
+        void Reset() {
+            Debug.LogWarning("Reset()");
+        }
         [UCL.Core.ATTR.UCL_FunctionButton]
         public override void Init() {
             base.Init();
             var terrain = new int[m_GenSize.x, m_GenSize.y, m_GenSize.z];
+            float sx = UCL.Core.MathLib.UCL_Random.Instance.NextFloat(100f);
+            float sy = UCL.Core.MathLib.UCL_Random.Instance.NextFloat(100f);
             for(int i = 0; i < m_GenSize.x; i++) {
                 for(int j = 0; j < m_GenSize.z; j++) {
-                    float height = 0.5f*m_GenSize.y * UCL.Core.MathLib.Noise.PerlinNoiseUnsigned(0.03f*j, 0.03f * i, 0);
+                    float height = 0.5f*m_GenSize.y * UCL.Core.MathLib.Noise.PerlinNoiseUnsigned(sx+0.03f*j, sy+0.03f * i, 0);
                     if(height > m_GenSize.y) height = m_GenSize.y;
+                    float val = UCL.Core.MathLib.Noise.PerlinNoiseUnsigned(sy + 0.05f * j, sx + 0.05f * i, 0);
+                    int v = Mathf.RoundToInt(val * 8f);
+                    if(v > 4) v = 4;
                     for(int k = 0; k < height; k++) {
-                        terrain[i, k, j] = Random.Range(0, 4) + 1;
+                        terrain[i, k, j] = v;
                     }
                     //terrain[i, 0, j] = Random.Range(0,4)+1;
                 }
@@ -274,7 +281,6 @@ namespace AOC.MapLib {
             UCL.Core.ThreadLib.UCL_ThreadManager.Instance.Run(delegate () {
                 GenMesh(Terrain, StartPos);
             }, delegate () {
-                //gameObject.SetActive(true);
                 GenerateMesh();
                 f_Updating = false;
                 end_act?.Invoke();
@@ -297,7 +303,6 @@ namespace AOC.MapLib {
             UpdateCollider();
         }
         public void UpdateCollider() {
-            /*
             for(int i = 0, size = m_BoxColliders.Count; i < size; i++) {
                 m_ColliderPool.Delete(m_BoxColliders[i]);
             }
@@ -312,7 +317,6 @@ namespace AOC.MapLib {
                     m_BoxColliders.Add(BoxCollider);
                 }
             }
-            */
         }
         override public void GenerateMesh() {
             UpdateCollider();
@@ -325,7 +329,7 @@ namespace AOC.MapLib {
             mesh.Clear();
             mesh.SetVertices(m_VerticeVec.m_Arr);//new ArraySegment<Vector3>(m_VerticeVec.m_Arr,0, m_VerticeVec.Count).Array;
             mesh.SetNormals(m_NormalVec.m_Arr);
-            mesh.SetTriangles(GenTriangles(m_FaceCount), 0, 6 * m_FaceCount, 0);// m_TrianglesVec.ResizeToCount();
+            mesh.SetTriangles(GenTriangles(m_FaceCount), 0, 6 * m_FaceCount, 0);
             mesh.uv = m_UVsVec.m_Arr;//m_UV.ToArray(); // add this line to the code here
 
             if(f_MeshCollideOn) {
@@ -334,7 +338,6 @@ namespace AOC.MapLib {
             }
         }
         void AddAllSurface(CubeSide side, int x, int y, int z, int type, int side_count) {
-
             const float c_size = 0.5f;
             int start_at = m_VerticeVec.Count;//m_Vertices.Count;
             const float UV_edge = 0.003f;
@@ -347,7 +350,6 @@ namespace AOC.MapLib {
                 if(type >= count) {
                     m_AtlasVec.AddCount(type + 1 - m_AtlasVec.Count);
                     for(int i = count; i <= type; i++) {
-                        var Data = new AtlasData();
                         float[] UV = new float[8];
                         Vector2Int UV_Pos = m_TextureAtlasRuntime.ConverPos(i);
                         UV[0] = (UV_edge + UV_Pos.x) * m_UVSize;
@@ -358,8 +360,7 @@ namespace AOC.MapLib {
                         UV[5] = (UV_Pos.y + 1 - UV_edge) * m_UVSize;
                         UV[6] = (UV_edge + UV_Pos.x) * m_UVSize;
                         UV[7] = (UV_Pos.y + 1 - UV_edge) * m_UVSize;
-                        //Data.m_Inited = true;
-                        Data.m_Atlas = UV;
+                        var Data = new AtlasData(UV);
                         m_AtlasVec[i] = Data;
                     }
                 }
@@ -584,12 +585,10 @@ namespace AOC.MapLib {
             m_FaceCount += side_count;
         }
 
-
         void AddSurface(CubeSide side, int x, int y, int z, Vector2Int UV_Pos) {
             const float c_size = 0.5f;
             int start_at = m_VerticeVec.Count;//m_Vertices.Count;
             const float UV_edge = 0.003f;
-            //m_UVsVec.m_Arr[0].x= (UV_edge + UV_Pos.x) * m_UVSize;
             m_UVsVec.AddCount(4);
             m_VerticeVec.AddCount(4);
 
