@@ -74,7 +74,7 @@ namespace AOC.MapLib {
             //Debug.LogWarning("check max" + check.Max + ",check min:" + check.Min);
             UCL.Core.DebugLib.UCL_DebugOnGUI.Instance.CreateData().AddOnGUIAct(() => {
                 GUILayout.BeginVertical();
-                GUILayout.Box(m_Texture.texture);
+                GUILayout.Box(m_Texture.GetTexture());
                 GUILayout.EndVertical();
             });
         }
