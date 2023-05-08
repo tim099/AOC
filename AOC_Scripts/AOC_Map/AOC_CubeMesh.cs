@@ -22,7 +22,7 @@ namespace AOC.MapLib {
             }
             public float[] m_Atlas;
         }
-        static public ComponentPool<BoxCollider> m_ColliderPool = new ComponentPool<BoxCollider>();
+        static public UnityComponentPool<BoxCollider> m_ColliderPool = new UnityComponentPool<BoxCollider>();
         
         static UCL_Vector<AtlasData> m_AtlasVec = new UCL_Vector<AtlasData>(256);
         //static Dictionary<CubeSide, Vector3[]> VerticesDic = new Dictionary<CubeSide, Vector3[]>();
